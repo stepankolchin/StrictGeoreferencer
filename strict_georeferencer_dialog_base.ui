@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StrictGeoreferencerDialog</class>
+ <widget class="QDialog" name="StrictGeoreferencerDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1200</width>
+    <height>800</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1900</width>
+    <height>1200</height>
+   </size>
+  </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Strict Georeferencing</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>-1</y>
+     <width>1191</width>
+     <height>791</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="usesScrollButtons">
+         <bool>false</bool>
+        </property>
+        <widget class="QWidget" name="tabMain">
+         <attribute name="title">
+          <string>Параметры</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>9</y>
+            <width>761</width>
+            <height>661</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelRaster">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Растр для привязки</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QgsMapLayerComboBox" name="rasterLayersCombo"/>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelPoints">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Опорные точки</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QgsFileWidget" name="referencePointsFileWidget">
+             <property name="tabletTracking">
+              <bool>true</bool>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line">
+             <property name="palette">
+              <palette>
+               <active>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Button">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Light">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>249</red>
+                   <green>249</green>
+                   <blue>249</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Midlight">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>207</red>
+                   <green>207</green>
+                   <blue>207</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Dark">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>83</red>
+                   <green>83</green>
+                   <blue>83</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Mid">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>111</red>
+                   <green>111</green>
+                   <blue>111</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Text">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="BrightText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>255</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ButtonText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Base">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>255</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Window">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Shadow">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="AlternateBase">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>210</red>
+                   <green>210</green>
+                   <blue>210</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ToolTipBase">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>220</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ToolTipText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="PlaceholderText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="128">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </active>
+               <inactive>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Button">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Light">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>249</red>
+                   <green>249</green>
+                   <blue>249</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Midlight">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>207</red>
+                   <green>207</green>
+                   <blue>207</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Dark">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>83</red>
+                   <green>83</green>
+                   <blue>83</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Mid">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>111</red>
+                   <green>111</green>
+                   <blue>111</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Text">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="BrightText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>255</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ButtonText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Base">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>255</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Window">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Shadow">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="AlternateBase">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>210</red>
+                   <green>210</green>
+                   <blue>210</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ToolTipBase">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>220</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ToolTipText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="PlaceholderText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="128">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </inactive>
+               <disabled>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>83</red>
+                   <green>83</green>
+                   <blue>83</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Button">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Light">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>249</red>
+                   <green>249</green>
+                   <blue>249</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Midlight">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>207</red>
+                   <green>207</green>
+                   <blue>207</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Dark">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>83</red>
+                   <green>83</green>
+                   <blue>83</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Mid">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>111</red>
+                   <green>111</green>
+                   <blue>111</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Text">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>83</red>
+                   <green>83</green>
+                   <blue>83</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="BrightText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>255</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ButtonText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>83</red>
+                   <green>83</green>
+                   <blue>83</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Base">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Window">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Shadow">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="AlternateBase">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>166</red>
+                   <green>166</green>
+                   <blue>166</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ToolTipBase">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>255</red>
+                   <green>255</green>
+                   <blue>220</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="ToolTipText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="PlaceholderText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="128">
+                   <red>0</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </disabled>
+              </palette>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Sunken</enum>
+             </property>
+             <property name="lineWidth">
+              <number>3</number>
+             </property>
+             <property name="midLineWidth">
+              <number>1</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelCs">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Целевая система координат</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QgsProjectionSelectionWidget" name="projectionSelector"/>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelOutputFile">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Выходной файл</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QgsFileWidget" name="outputFileWidget">
+             <property name="tabletTracking">
+              <bool>true</bool>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tabLog">
+         <attribute name="title">
+          <string>Журнал</string>
+         </attribute>
+         <widget class="QTextEdit" name="logEdit">
+          <property name="geometry">
+           <rect>
+            <x>13</x>
+            <y>0</y>
+            <width>901</width>
+            <height>671</height>
+           </rect>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonAccept">
+          <property name="text">
+           <string>Выполнить</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonDecline">
+          <property name="text">
+           <string>Отмена</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="lineWidth">
+         <number>4</number>
+        </property>
+        <property name="text">
+         <string>Модуль строгой привязки</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <property name="indent">
+         <number>15</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="textBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <property name="documentTitle">
+         <string/>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Данный модуль позволяет создать пространственную привязку для  любого изображения поверхности Земли. Для работы плагина необходимо иметь растр любого формата (поддерживаемого QGIS) и файл с расширением &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-style:italic;&quot;&gt;.csv&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, в котором через запятую перечислены:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;1.&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt; Х-координата&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; опорной точки в системе координат снимка;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;2. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;У-координата&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; опорной точки в системе координат снимка;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;3. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;EPSG-код&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; системы координат опорных точек поверхности Земли;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;4. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Х-координата&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; опорной точки в системе координат, указанной в пункте 3;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;5. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;У-координата&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; опорной точки в системе координат, указанной в пункте 3.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Например, запись вида:&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-style:italic;&quot;&gt;123 234 4326 53.06978  44.31906&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Будет интерпретироваться как, опорной точке в системе координат EPSG-4326 - WGS 84 соответствует центр пикселя исходного изображения с координатами (123, 234). Начало отсчета системы координат исходного изображение находится в верхнем левом углу, ось Х - направлена вправо, ось У - вниз.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsFileWidget</class>
+   <extends>QWidget</extends>
+   <header>qgsfilewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QgsProjectionSelectionWidget</class>
+   <extends>QWidget</extends>
+   <header>qgsprojectionselectionwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>rasterLayersCombo</tabstop>
+  <tabstop>projectionSelector</tabstop>
+  <tabstop>pushButtonAccept</tabstop>
+  <tabstop>pushButtonDecline</tabstop>
+  <tabstop>logEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButtonDecline</sender>
+   <signal>clicked()</signal>
+   <receiver>StrictGeoreferencerDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>926</x>
+     <y>786</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonAccept</sender>
+   <signal>clicked()</signal>
+   <receiver>StrictGeoreferencerDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>845</x>
+     <y>786</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>429</x>
+     <y>783</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
