@@ -32,6 +32,8 @@ from qgis.PyQt.QtWidgets import QDialog
 from qgis.core import QgsMapLayerProxyModel
 from qgis.gui import QgisInterface
 from .strict_georeferencer_dialog import Ui_StrictGeoreferencerDialog
+import sympy as sp
+import csv
 
 class StrictGeoreferencerDialog(QDialog, Ui_StrictGeoreferencerDialog):
     def __init__(self, parent=None):
@@ -80,6 +82,7 @@ class StrictGeoreferencer:
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
+
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -193,7 +196,6 @@ class StrictGeoreferencer:
                 action)
             self.iface.removeToolBarIcon(action)
 
-
     def run(self):
         """Run method that performs all the real work"""
 
@@ -211,6 +213,117 @@ class StrictGeoreferencer:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass
+            alpha = 0.0
+            omega = 0.0
+            kappa = 0.0
+            a1 = a2 = a3 = b1 = b2 = b3 = c1 = c2 = c3 = 0.0
+            Xs = Ys = Zs = 0.0
+            f = x0 = y0 = 0.0
+            meanedSquaredError = 10000
+            while (meanedSquaredError > 0.1): # TOCHECK: add precision condition for correction vector data 
+                A = sp.Matrix([[]])
+                L = sp.Matrix()
+                fileName = self.dlg.referencePointsFileWidget.filePath()
+                with open(fileName, 'r', encoding='utf-8') as file:
+                    csv_reader = csv.reader(file)
+                    for line in csv_reader:
+                        x = float(line[0])  #read data about reference points coordinates on the image from file
+                        y = float(line[1]) #same
+                        X = float(line[3]) #same but on the surface
+                        Y = float(line[4]) #same
+                        Z = float(line[5]) #same
+
+                        a1 = calculateA1(alpha, omega, kappa)
+                        a2 = calculateA2(alpha, omega, kappa)
+                        a3 = calculateA3(alpha, omega, kappa)
+                        b1 = calculateB1(alpha, omega, kappa)
+                        b2 = calculateB2(alpha, omega, kappa)
+                        b3 = calculateB3(alpha, omega, kappa)
+                        c1 = calculateC1(alpha, omega, kappa)
+                        c2 = calculateC2(alpha, omega, kappa)
+                        c3 = calculateC3(alpha, omega, kappa)
+
+
+                        Xstreak = a1 * x + a2 * y - a3 * f
+                        Ystreak = b1 * x + b2 * y - b3 * f
+                        Zstreak = c1 * x + c2 * y - c3 * f
+
+                        # a(x-x0) + b(y-y0) + c(f-f0) + d(alpha - alpha0) + e(omega - omega0) + g(kappa - kappa0) + h(Xs - Xs0) + i(Ys - Ys0) + j(Zs - Zs0) + l = v
+
+                        a = (Z - Zs) * (a1 * Zstreak - c1 * Xstreak) / (Zstreak * Zstreak)
+                        aStreak = (Z - Zs) * (b1 * Zstreak - c1 * Ystreak) / (Zstreak * Zstreak)
+
+                        b = (Z - Zs) * (a2 * Zstreak - c2 * Xstreak) / (Zstreak * Zstreak)
+                        bStreak = (Z - Zs) * (b2 * Zstreak - c2 * Ystreak) / (Zstreak * Zstreak)
+
+                        c = (Z - Zs) * (a3 * Zstreak - c3 * Xstreak) / (Zstreak * Zstreak)
+                        cStreak = -(Z - Zs) * (b3 * Zstreak - c3 * Xstreak) / (Zstreak * Zstreak)
+
+                        d = -(Z - Zs) * (Xstreak * Xstreak + Zstreak * Zstreak) / (Zstreak * Zstreak)
+                        dStreak = -(Z - Zs) * (Xstreak + Ystreak) / (Zstreak * Zstreak)
+
+                        e = - (Z - Zs) * (Ystreak * Zstreak * sp.sin(alpha) + Xstreak * Ystreak * sp.cos(alpha)) / (Zstreak * Zstreak)
+                        eStreak = (Z - Zs) * (Zstreak * ((x * sp.sin(kappa) + y * sp.cos(kappa)) * b3 + f * sp.cos(omega)) - Ystreak * Ystreak * sp.cos(alpha)) / (Zstreak * Zstreak)
+
+                        g = (Z - Zs) * (Zstreak * (a2 * x - a1 * y) - Xstreak * (c2 * x - c1 * y)) / (Zstreak * Zstreak)
+                        gStreak = (Z - Zs) * (Zstreak * (b2 * x - b1 *y) - Ystreak * (c2 * x - c1 *y)) / (Zstreak * Zstreak)
+
+                        h = 1
+                        hStreak = 0
+
+                        i = 0
+                        iStreak = 1
+
+                        j = -(Xstreak / Zstreak)
+                        jStreak = -(Ystreak / Zstreak)
+
+                        l = (Xs + (Z -Zs) * Xstreak / Zstreak) - X
+                        lStreak = (Ys + (Z - Zs) * Ystreak / Zstreak) - Y
+
+                        A = A.row_insert(A.rows, sp.Matrix([[a, b, c, d, e, g, h, i, j], [aStreak, bStreak, cStreak, dStreak, eStreak, gStreak, hStreak, iStreak, jStreak]]))
+                        L = L.row_insert(L.rows, sp.Matrix([[l], [lStreak]]))
+                correctionVector = A.solve(-L)
+                
+                x0 += correctionVector.row(0)
+                y0 += correctionVector.row(1)
+                f += correctionVector.row(2)
+                alpha += correctionVector.row(3)
+                omega += correctionVector.row(4)
+                kappa += correctionVector.row(5)
+                Xs += correctionVector.row(6)
+                Ys += correctionVector.row(7)
+                Zs += correctionVector.row(8)
+                meanedSquaredError = (correctionVector.row(0)*correctionVector.row(0) + correctionVector.row(1)*correctionVector.row(1) + correctionVector.row(2)*correctionVector.row(2) +
+                                     correctionVector.row(3)*correctionVector.row(3) + correctionVector.row(4)*correctionVector.row(4) + correctionVector.row(5)*correctionVector.row(5) +
+                                     correctionVector.row(6)*correctionVector.row(6) + correctionVector.row(7)*correctionVector.row(7) + correctionVector.row(8)*correctionVector.row(8)) / correctionVector.rows() #MSE
+                
+                
+def calculateA1(alpha, omega, kappa):
+    return sp.cos(alpha) * sp.cos(kappa) - sp.sin(alpha) * sp.sin(omega) * sp.sin(kappa)
+    
+def calculateA2(alpha, omega, kappa):
+    return -sp.cos(alpha) * sp.sin(kappa) - sp.sin(alpha) * sp.sin(omega) * sp.cos(kappa)
+
+def calculateA3(alpha, omega, kappa):
+    return -sp.sin(alpha) * sp.cos(omega)
+    
+def calculateB1(alpha, omega, kappa):
+    return sp.cos(omega) * sp.sin(kappa)
+    
+def calculateB2(alpha, omega, kappa):
+    return sp.cos(omega) * sp.cos(kappa)
+
+def calculateB3(alpha, omega, kappa):
+    return -sp.sin(omega)
+    
+def calculateC1(alpha, omega, kappa):
+    return sp.sin(alpha) * sp.cos(kappa) + sp.cos(alpha) * sp.sin(omega) * sp.sin(kappa)
+    
+def calculateC2(alpha, omega, kappa):
+    return -sp.sin(alpha) * sp.sin(kappa) + sp.cos(alpha) * sp.sin(omega) * sp.cos(kappa)
+    
+def calculateC3(alpha, omega, kappa):
+    return sp.cos(alpha) * sp.cos(omega)
+
+
+                
